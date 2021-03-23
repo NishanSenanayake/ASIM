@@ -2,7 +2,7 @@
 """
 Created on Fri Mar 12 12:29:42 2021
 
-@author: 14198
+@author: Nishan Senanayake
 """
 
 from selenium import webdriver
@@ -14,6 +14,9 @@ import time
 # Change the varibale as you need
 number_of_pages = 5
 
+#replace with your drver path
+driver_path ="D:\chrome_driver\chromedriver.exe"
+
 
 springer_link='https://link.springer.com'
 article_list=[]
@@ -23,7 +26,7 @@ article_info=[]
 
 options = Options()
 options.headless = True
-driver = webdriver.Chrome(executable_path="D:\chrome_driver\chromedriver.exe", chrome_options=options)
+driver = webdriver.Chrome(executable_path=driver_path, chrome_options=options)
 
 
 for x in range(1, (number_of_pages+1)):
@@ -68,18 +71,3 @@ art=pd.DataFrame(article_info)
 final= pd.concat([art,caps,img], axis=1)  
 final.columns =['Article', 'Caption', 'Image_link'] 
     
- 
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
