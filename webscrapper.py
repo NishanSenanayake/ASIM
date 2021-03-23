@@ -11,6 +11,9 @@ import pandas as pd
 from selenium.webdriver.chrome.options import Options
 import time
 
+# Change the varibale as you need
+number_of_pages = 5
+
 
 springer_link='https://link.springer.com'
 article_list=[]
@@ -21,8 +24,6 @@ article_info=[]
 options = Options()
 options.headless = True
 driver = webdriver.Chrome(executable_path="D:\chrome_driver\chromedriver.exe", chrome_options=options)
-
-number_of_pages = 2
 
 
 for x in range(1, (number_of_pages+1)):
@@ -47,13 +48,18 @@ for x in range(1, (number_of_pages+1)):
                 images=soup_article.find_all("a", class_='c-article-section__figure-link')
                 img_captions= soup_article.find_all("div",class_="c-article-section__figure-description")
                 for cap in img_captions:
-                    caption=cap.find("p").get_text()
-                    caption_info.append(caption)
-                    article_info.append(article_name)
+                    try:
+                        caption=cap.find("p").get_text()
+                        caption_info.append(caption)
+                        article_info.append(article_name)
+                        i=i+1
+                        print(i)
+                    except:
+                        print("no content")
                 for a in images:
-                    image_tag = a.findChildren("img")
-                    image_info.append((image_tag[0]["src"]))
-                print('number of images = '+str(len(images)))          
+                   image_tag = a.findChildren("img")
+                   image_info.append((image_tag[0]["src"]))
+                   print('number of images = '+str(len(images)))          
           
     
 caps= pd.DataFrame(caption_info)
