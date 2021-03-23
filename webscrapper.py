@@ -55,14 +55,12 @@ for x in range(1, (number_of_pages+1)):
                         caption=cap.find("p").get_text()
                         caption_info.append(caption)
                         article_info.append(article_name)
-                        i=i+1
-                        print(i)
                     except:
                         print("no content")
                 for a in images:
                    image_tag = a.findChildren("img")
                    image_info.append((image_tag[0]["src"]))
-                   print('number of images = '+str(len(images)))          
+                print('number of images = '+str(len(images)))          
           
     
 caps= pd.DataFrame(caption_info)
